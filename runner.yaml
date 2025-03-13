@@ -22,7 +22,7 @@ build:
     cd /tmp/sshamble && go mod download
     cd /tmp/sshamble && go build -o sshamble
     cd /tmp/sshamble && cp /tmp/sshamble/sshamble /go/bin/sshamble
-    cd /tmp/sshamble && /go/bin/sshamble badkeys-update
+    cd /go/bin && /go/bin/sshamble badkeys-update
     echo "END: Building sshamble"
 
 webform:
@@ -32,4 +32,4 @@ webform:
 
 launch:
   type: binary
-  command: /go/bin/sshamble badkeys-update; /go/bin/sshamble scan -p 22 -u root,admin -o outputs/scan.json -l outputs/scan.log ${selector} && /go/bin/sshamble analyze -o outputs/results outputs/scan.json
+  command: /go/bin/sshamble scan -p 22 -u root,admin -o outputs/scan.json -l outputs/scan.log ${selector} && /go/bin/sshamble analyze -o outputs/results outputs/scan.json
