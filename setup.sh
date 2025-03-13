@@ -16,3 +16,4 @@ cd /tmp && git clone --depth 1 https://github.com/runZeroInc/sshamble.git
 cd /tmp/sshamble && sudo go mod download
 cd /tmp/sshamble && go build -o sshamble
 cd /tmp/sshamble && cp /tmp/sshamble/sshamble /go/bin/sshamble
+/go/bin/sshamble badkeys-update

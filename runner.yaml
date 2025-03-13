@@ -31,4 +31,4 @@ webform:
 
 launch:
   type: binary
-  command: /go/bin/sshamble scan -p 22 -u root,admin -o scan.json -l scan.log ${selector}
+  command: /go/bin/sshamble scan -p 22 -u root,admin -o outputs/scan.json -l outputs/scan.log ${selector} && /go/bin/sshamble analyze -o outputs/results outputs/scan.json
