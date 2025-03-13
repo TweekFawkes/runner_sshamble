@@ -22,6 +22,7 @@ build:
     cd /tmp/sshamble && go mod download
     cd /tmp/sshamble && go build -o sshamble
     cd /tmp/sshamble && cp /tmp/sshamble/sshamble /go/bin/sshamble
+    cd /tmp/sshamble && /go/bin/sshamble badkeys-update
     echo "END: Building sshamble"
 
 webform:
