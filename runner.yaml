@@ -1,0 +1,34 @@
+runner:
+  name: SSH Edge Case Enumeration
+  description: Research tool for SSH implementations that includes: Interesting attacks against authentication, Post-session authentication attacks, Pre-authentication state transitions, Authentication timing analysis, Post-session enumeration
+  version: 0.0.1
+
+build:
+  commands: |
+    echo "START: Building sshamble"
+    apt-get update
+    apt-get install -y ca-certificates
+    apt-get install -y build-essential
+    apt-get install -y git
+    wget https://go.dev/dl/go1.22.6.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz && rm go1.22.6.linux-amd64.tar.gz
+    ENV GOROOT=/usr/local/go
+    ENV GOPATH=/go
+    ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    ENV GO111MODULE=on
+    ENV CGO_ENABLED=1
+    mkdir -p /go/src
+    mkdir -p /go/bin
+    cd /tmp && git clone --depth 1 https://github.com/runZeroInc/sshamble.git
+    cd /tmp/sshamble && go mod download
+    cd /tmp/sshamble && go build -o sshamble
+    cd /tmp/sshamble && cp /tmp/sshamble/sshamble /go/bin/sshamble
+    echo "END: Building sshamble"
+
+webform:
+  - name: selector
+    prompt: IP to Scan
+    type: text
+
+launch:
+  type: binary
+  command: /go/bin/sshamble scan -p 22 -u root,admin -o scan.json -l scan.log ${selector}
